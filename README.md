@@ -11,8 +11,8 @@
 1) **캐릭터 정의 입력**
 
     - 캐릭터 수 `N`
-      - 각 캐릭터의 기본 스탯
-    - 이름, HP, ATK, DEF, SPD, CRIT(0~1)
+    - 각 캐릭터의 기본 스탯
+      - 이름, HP, ATK, DEF, SPD, CRIT(0~1)
 
 
 ```plaintext
