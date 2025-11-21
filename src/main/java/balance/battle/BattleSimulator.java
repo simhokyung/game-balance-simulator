@@ -1,10 +1,24 @@
 package balance.battle;
 
 import balance.domain.Character;
+import balance.support.DefaultRandomProvider;
+import balance.support.RandomProvider;
 
 public class BattleSimulator {
 
     private static final int MAX_TURNS = 100;
+    private static final double CRIT_MULTIPLIER = 1.5;
+
+    private final RandomProvider randomProvider;
+
+    public BattleSimulator(){
+        this(new DefaultRandomProvider());
+    }
+
+    public BattleSimulator(RandomProvider randomProvider){
+        this.randomProvider = randomProvider;
+    }
+
 
     public BattleResult simulate(Character first, Character second) {
         BattleCharacter firstBattle = BattleCharacter.from(first);
@@ -60,11 +74,22 @@ public class BattleSimulator {
     }
 
     private int calculateDamage(BattleCharacter attacker, BattleCharacter defender) {
-        int rawDamage = attacker.getCharacter().getAttack() - defender.getCharacter().getDefense();
-        if (rawDamage < 0) {
+
+        int baseDamage = attacker.getCharacter().getAttack() - defender.getCharacter().getDefense();
+        if (baseDamage <= 0) {
             return 0;
         }
-        return rawDamage;
+
+        double critChance = attacker.getCharacter().getCritChance();
+        double roll = randomProvider.nextDouble();
+        boolean isCritical = roll < critChance;
+
+        double finalDamage = baseDamage;
+        if(isCritical) {
+            finalDamage = baseDamage * CRIT_MULTIPLIER;
+        }
+
+        return (int) finalDamage;
     }
 
     private double calculateHpRatio(BattleCharacter battleCharacter) {
