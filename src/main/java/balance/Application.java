@@ -7,23 +7,23 @@ import balance.domain.Character;
 import balance.simulation.CharacterStats;
 import balance.simulation.SimulationService;
 import balance.view.BalanceReportPrinter;
+import balance.view.InputView;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class Application {
 
     public static void main(String[] args) {
-        // 1. 캐릭터 정의 (예시 시나리오)
-        Character warrior = new Character("Warrior", 120, 40, 20, 15, 0.2);
-        Character assassin = new Character("Assassin", 80, 55, 10, 25, 0.4);
-        Character tank = new Character("Tank", 180, 25, 30, 10, 0.1);
-        Character mage = new Character("Mage", 90, 50, 8, 18, 0.3);
+        InputView inputView = new InputView();
 
-        List<Character> characters = Arrays.asList(warrior, assassin, tank, mage);
+        System.out.println("=== Game Balance Simulator ===");
+        System.out.println("시뮬레이션할 캐릭터를 입력해 주세요.");
+        System.out.println();
 
-        int roundsPerPair = 20; // 캐릭터 쌍마다 20판씩 돌려본다.
+        // 1. 사용자로부터 캐릭터 목록과 라운드 수를 입력받기
+        List<Character> characters = inputView.readCharacters();
+        int roundsPerPair = inputView.readRoundsPerPair();
 
         // 2. 전투/시뮬레이션/분석 구성
         BattleSimulator battleSimulator = new BattleSimulator();        // 랜덤 기반 전투 엔진
