@@ -4,6 +4,7 @@ import balance.analysis.BalanceAnalyzer;
 import balance.analysis.BalanceAssessment;
 import balance.battle.BattleSimulator;
 import balance.domain.Character;
+import balance.preset.PresetCharacters;
 import balance.simulation.CharacterStats;
 import balance.simulation.SimulationService;
 import balance.view.BalanceReportPrinter;
@@ -28,11 +29,16 @@ public class Application {
 
         if (mode == 1) {
             int scenarioChoice = inputView.readPresetScenarioChoice();
+
             if (scenarioChoice == 1) {
-                characters = balance.scenario.PresetScenarios.basicRoles();
+                characters = PresetScenarios.basicRoles();
+            } else if (scenarioChoice == 2) {
+                characters = PresetScenarios.extremeComparison();
             } else {
-                characters = balance.scenario.PresetScenarios.extremeComparison();
+                // 3번: 1대1 메타 6 아키타입
+                characters = PresetCharacters.metaArchetypes();
             }
+
             roundsPerPair = inputView.readRoundsPerPair();
         } else {
             System.out.println();
@@ -43,9 +49,9 @@ public class Application {
         }
 
         // 2. 전투/시뮬레이션/분석 구성
-        BattleSimulator battleSimulator = new BattleSimulator();        // 랜덤 기반 전투 엔진
+        BattleSimulator battleSimulator = new BattleSimulator();
         SimulationService simulationService = new SimulationService(battleSimulator);
-        BalanceAnalyzer balanceAnalyzer = new BalanceAnalyzer();        // 기본 임계값 사용
+        BalanceAnalyzer balanceAnalyzer = new BalanceAnalyzer();
         BalanceReportPrinter printer = new BalanceReportPrinter();
 
         // 3. 전체 리그 시뮬레이션 실행
