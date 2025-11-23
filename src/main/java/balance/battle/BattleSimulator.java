@@ -40,6 +40,12 @@ public class BattleSimulator {
         this.skillSetProvider = Objects.requireNonNull(skillSetProvider, "skillSetProvider는 null일 수 없습니다.");
     }
 
+    //  새로 추가: 스킬셋 프로바이더만 넘기는 생성자
+    public BattleSimulator(SkillSetProvider skillSetProvider) {
+        this(new DefaultRandomProvider(), new DefaultDamageCalculator(), skillSetProvider);
+    }
+
+
     public BattleResult simulate(Character first, Character second) {
         // ★ 여기에서 캐릭터별 스킬 세트를 조회해서 BattleCharacter에 주입
         BattleCharacter firstBattle = BattleCharacter.from(first, skillSetProvider.getSkillsFor(first));
