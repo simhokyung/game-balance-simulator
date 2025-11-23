@@ -1,96 +1,75 @@
 package balance.preset;
 
 import balance.domain.Character;
+
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * 1대1 전투용 6개 캐릭터 아키타입 프리셋 모음.
- *
- * 설계 기준:
- *  - HP 90~150, ATK 30~65, DEF 5~40, SPD 10~35, CRIT 0~30%
- *  - 브루저를 기준점(Baseline)으로 두고 나머지 역할을 파생
- *  - 어쌔신/탱커/스피드/서스테이너/하이브리드는
- *    전투 곡선(초/중/후반), 승리 전략, 약점, 상성을 고려해 설계
- */
 public final class PresetCharacters {
+
+    // 브루저: 기준 캐릭터 (조금 상향해서 중심축 역할)
+    private static final Character BRUISER = new Character(
+            "Bruiser",
+            130,   // HP: 여전히 튼튼
+            45,    // ATK: 기준 딜
+            25,    // DEF
+            20,    // SPD: 기존 18 → 20 (조금 더 민첩하게)
+            0.10   // CRIT
+    );
+
+    // 어쌔신: 여전히 폭딜 + 고속, 하지만 너무 압도적이지 않게 너프
+    private static final Character ASSASSIN = new Character(
+            "Assassin",
+            85,    // HP: 살짝 더 유리몸
+            52,    // ATK: 60 → 52 (비율 공식이라 이 정도만 내려도 체감 큼)
+            10,    // DEF: 그대로, 종이 방패
+            30,    // SPD: 35 → 30 (여전히 빠르지만 압도적이진 않게)
+            0.20   // CRIT: 0.25 → 0.20
+    );
+
+    // 탱커: 진짜로 "버티기만 하는 바보"가 아니라 "버티면서 역킬도 가능한 벽"으로
+    private static final Character TANK = new Character(
+            "Tank",
+            165,   // HP: 150 → 165 (탱커 정체성 강화)
+            36,    // ATK: 30 → 36 (맞기만 하는 게 아니라 어느 정도 패는 딜)
+            40,    // DEF: 그대로, 방어벽
+            18,    // SPD: 10 → 18 (여전히 느리지만, 아예 턴을 못 가져가진 않게)
+            0.05   // CRIT
+    );
+
+    // 스피드러너: 속도로 이득 보는 캐릭, 딜은 살짝 조정
+    private static final Character SPEEDSTER = new Character(
+            "Speedster",
+            100,   // HP
+            38,    // ATK: 40 → 38 (조금 너프)
+            15,    // DEF
+            32,    // SPD: 여전히 매우 빠름 (정체성 유지)
+            0.15   // CRIT
+    );
+
+    // 서스테이너: 나중에 회복/흡혈 스킬 붙을 예정이라, 지금은 기초 스펙 보정
+    private static final Character SUSTAINER = new Character(
+            "Sustainer",
+            125,   // HP: 120 → 125
+            36,    // ATK: 35 → 36 (딜 조금 상향)
+            22,    // DEF: 20 → 22
+            24,    // SPD: 20 → 24 (너무 굼뜨지 않게)
+            0.08   // CRIT: 0.05 → 0.08
+    );
+
+    // 하이브리드: 종합 능력치가 너무 높았으니, 전체적으로 살짝 너프
+    private static final Character HYBRID = new Character(
+            "Hybrid",
+            110,   // HP: 그대로
+            48,    // ATK: 50 → 48
+            20,    // DEF
+            24,    // SPD: 25 → 24
+            0.18   // CRIT: 0.20 → 0.18
+    );
 
     private PresetCharacters() {
         // 인스턴스 생성 방지
     }
-
-    /**
-     * ⭐ 브루저(Bruiser) — 기준 캐릭터 (Baseline)
-     * 역할: 안정성, 모든 밸런스 비교의 기준
-     * 전투 곡선: 중반 강함
-     *
-     * HP 130 / ATK 45 / DEF 25 / SPD 18 / CRIT 0.10
-     */
-    private static final Character BRUISER = new Character(
-            "Bruiser", 130, 45, 25, 18, 0.10
-    );
-
-    /**
-     * ⭐ 어쌔신(Assassin) — 원턴킬 폭발형 (Burst)
-     * 역할: 초반 압살
-     * 전투 곡선: 초반 매우 강함, 후반 약함
-     *
-     * HP 90 / ATK 60 / DEF 10 / SPD 35 / CRIT 0.25
-     */
-    private static final Character ASSASSIN = new Character(
-            "Assassin", 90, 60, 10, 35, 0.25
-    );
-
-    /**
-     * ⭐ 탱커(Tank) — 방어벽 (Iron Wall)
-     * 역할: 후반 압도
-     * 전투 곡선: 후반 폭발적으로 강함
-     *
-     * HP 150 / ATK 30 / DEF 40 / SPD 10 / CRIT 0.05
-     */
-    private static final Character TANK = new Character(
-            "Tank", 150, 30, 40, 10, 0.05
-    );
-
-    /**
-     * ⭐ 스피드러너(Speedster) — 순수 속도형
-     * 역할: 턴 이득, 다단 행동
-     * 전투 곡선: 초반 약간 강함, 중후반 유지형
-     *
-     * HP 100 / ATK 40 / DEF 15 / SPD 32 / CRIT 0.15
-     */
-    private static final Character SPEEDSTER = new Character(
-            "Speedster", 100, 40, 15, 32, 0.15
-    );
-
-    /**
-     * ⭐ 서스테이너(Sustainer) — 지속전/흡혈형
-     * 역할: 중장기전 최강 (향후 회복/흡혈 메커니즘과 연계 예정)
-     * 전투 곡선: 초반 약함 → 중반 강함 → 후반 최강
-     *
-     * HP 120 / ATK 35 / DEF 20 / SPD 20 / CRIT 0.05
-     *
-     * ⚠ 아직 Character/BattleSimulator에 회복 로직은 없으므로
-     *   현재는 "지속형 스탯만 잡아둔 상태"이며,
-     *   나중에 패시브/스킬로 회복 효과를 붙일 예정.
-     */
-    private static final Character SUSTAINER = new Character(
-            "Sustainer", 120, 35, 20, 20, 0.05
-    );
-
-    /**
-     * ⭐ 하이브리드(Hybrid) — 메타 파괴형 조합 캐릭
-     * 역할: 다재다능 + 위험한 빌드
-     * 전투 곡선: 중반 최고 전성기
-     *
-     * HP 110 / ATK 50 / DEF 20 / SPD 25 / CRIT 0.20
-     */
-
-    private static final Character HYBRID = new Character(
-            "Hybrid", 110, 50, 20, 25, 0.20
-    );
-
-
 
     public static Character bruiser() {
         return BRUISER;
@@ -117,7 +96,7 @@ public final class PresetCharacters {
     }
 
     /**
-     * 1대1 메타 분석용 6 아키타입 전체 반환.
+     * 1대1 메타 밸런스 분석용 6 아키타입 전체 목록.
      */
     public static List<Character> metaArchetypes() {
         return Arrays.asList(
@@ -129,6 +108,4 @@ public final class PresetCharacters {
                 HYBRID
         );
     }
-
-
 }

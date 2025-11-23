@@ -40,6 +40,7 @@ public class InputView {
         System.out.println("1: 미리 준비된 프리셋 시나리오 사용");
         System.out.println("2: 직접 캐릭터 스펙 입력");
         System.out.print("메뉴 번호를 입력하세요 (1-2): ");
+        System.out.println();
 
         return readIntInRange(1, 2, "메뉴 번호는 1 또는 2여야 합니다.");
     }
@@ -50,6 +51,7 @@ public class InputView {
         System.out.println("2: 극단적인 전투 캐릭터 4종 (GlassCannon / IronWall / Balanced / Speedster)");
         System.out.println("3: 1대1 밸런스형 전투 캐릭터 6종 (Bruiser / Assassin / Tank / Speedster / Sustainer / Hybrid)");
         System.out.print("시나리오 번호를 입력하세요 (1-3): ");
+        System.out.println();
 
         return readIntInRange(1, 3, "시나리오 번호는 1, 2 또는 3이어야 합니다.");
     }
