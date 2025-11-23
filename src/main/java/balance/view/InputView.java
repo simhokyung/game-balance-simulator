@@ -46,14 +46,13 @@ public class InputView {
 
     public int readPresetScenarioChoice() {
         System.out.println("프리셋 시나리오를 선택하세요:");
-        System.out.println("1: 기본 롤 조합 (Warrior / Assassin / Tank / Mage)");
-        System.out.println("2: 극단 비교 (GlassCannon / IronWall / Balanced / Speedster)");
-        System.out.print("시나리오 번호를 입력하세요 (1-2): ");
+        System.out.println("1: 기본 전투 롤 4종 (Warrior / Assassin / Tank / Mage)");
+        System.out.println("2: 극단적인 전투 캐릭터 4종 (GlassCannon / IronWall / Balanced / Speedster)");
+        System.out.println("3: 1대1 밸런스형 전투 캐릭터 6종 (Bruiser / Assassin / Tank / Speedster / Sustainer / Hybrid)");
+        System.out.print("시나리오 번호를 입력하세요 (1-3): ");
 
-        return readIntInRange(1, 2, "시나리오 번호는 1 또는 2여야 합니다.");
+        return readIntInRange(1, 3, "시나리오 번호는 1, 2 또는 3이어야 합니다.");
     }
-
-
 
     public int readRoundsPerPair() {
         System.out.print("각 캐릭터 조합당 전투 횟수(라운드 수)를 입력하세요 (예: 20): ");
@@ -78,7 +77,6 @@ public class InputView {
         }
     }
 
-
     private int readIntInRange(int min, int max, String errorMessage) {
         while (true) {
             String line = scanner.nextLine();
@@ -96,7 +94,6 @@ public class InputView {
             }
         }
     }
-
 
     // 테스트를 위해 분리한 파싱 로직
     static Character parseCharacterLine(String line) {
@@ -123,7 +120,4 @@ public class InputView {
             throw new IllegalArgumentException("HP/ATK/DEF/SPD는 정수, CRIT는 실수(double)로 입력해야 합니다.");
         }
     }
-
-
-
 }
