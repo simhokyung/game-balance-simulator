@@ -1,10 +1,14 @@
 package balance.battle;
 
 import balance.domain.Character;
+import balance.skill.DefaultSkillSetProvider;
 import balance.skill.Skill;
 import balance.skill.SkillContext;
+import balance.skill.SkillSetProvider;
 import balance.support.DefaultRandomProvider;
 import balance.support.RandomProvider;
+
+import java.util.Objects;
 
 public class BattleSimulator {
 
@@ -13,24 +17,33 @@ public class BattleSimulator {
 
     private final RandomProvider randomProvider;
     private final DamageCalculator damageCalculator;
+    private final SkillSetProvider skillSetProvider;
 
     public BattleSimulator() {
-        this(new DefaultRandomProvider(), new DefaultDamageCalculator());
+        this(new DefaultRandomProvider(), new DefaultDamageCalculator(), new DefaultSkillSetProvider());
     }
 
     public BattleSimulator(RandomProvider randomProvider) {
-        this(randomProvider, new DefaultDamageCalculator());
+        this(randomProvider, new DefaultDamageCalculator(), new DefaultSkillSetProvider());
     }
 
     public BattleSimulator(RandomProvider randomProvider,
                            DamageCalculator damageCalculator) {
-        this.randomProvider = randomProvider;
-        this.damageCalculator = damageCalculator;
+        this(randomProvider, damageCalculator, new DefaultSkillSetProvider());
+    }
+
+    public BattleSimulator(RandomProvider randomProvider,
+                           DamageCalculator damageCalculator,
+                           SkillSetProvider skillSetProvider) {
+        this.randomProvider = Objects.requireNonNull(randomProvider, "randomProvider는 null일 수 없습니다.");
+        this.damageCalculator = Objects.requireNonNull(damageCalculator, "damageCalculator는 null일 수 없습니다.");
+        this.skillSetProvider = Objects.requireNonNull(skillSetProvider, "skillSetProvider는 null일 수 없습니다.");
     }
 
     public BattleResult simulate(Character first, Character second) {
-        BattleCharacter firstBattle = BattleCharacter.from(first);
-        BattleCharacter secondBattle = BattleCharacter.from(second);
+        // ★ 여기에서 캐릭터별 스킬 세트를 조회해서 BattleCharacter에 주입
+        BattleCharacter firstBattle = BattleCharacter.from(first, skillSetProvider.getSkillsFor(first));
+        BattleCharacter secondBattle = BattleCharacter.from(second, skillSetProvider.getSkillsFor(second));
 
         double firstGauge = 0.0;
         double secondGauge = 0.0;
