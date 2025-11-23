@@ -7,68 +7,67 @@ import java.util.List;
 
 public final class PresetCharacters {
 
-    // 브루저: 기준 캐릭터 (조금 상향해서 중심축 역할)
+    // 브루저: 기준 캐릭터 (살짝 상향해서 진짜 "평균" 축)
     private static final Character BRUISER = new Character(
             "Bruiser",
-            130,   // HP: 여전히 튼튼
-            45,    // ATK: 기준 딜
+            130,   // HP
+            47,    // ATK: 45 -> 47 (조금 더 때리게)
             25,    // DEF
-            20,    // SPD: 기존 18 → 20 (조금 더 민첩하게)
+            22,    // SPD: 20 -> 22 (턴 주기 살짝 개선)
             0.10   // CRIT
     );
 
     // 어쌔신: 여전히 폭딜 + 고속, 하지만 너무 압도적이지 않게 너프
     private static final Character ASSASSIN = new Character(
             "Assassin",
-            85,    // HP: 살짝 더 유리몸
-            52,    // ATK: 60 → 52 (비율 공식이라 이 정도만 내려도 체감 큼)
-            10,    // DEF: 그대로, 종이 방패
-            30,    // SPD: 35 → 30 (여전히 빠르지만 압도적이진 않게)
-            0.20   // CRIT: 0.25 → 0.20
+            80,    // HP: 85 -> 80 (진짜 유리몸 느낌 강화)
+            48,    // ATK: 52 -> 48
+            10,    // DEF
+            28,    // SPD: 30 -> 28
+            0.18   // CRIT: 0.20 -> 0.18
     );
 
-    // 탱커: 진짜로 "버티기만 하는 바보"가 아니라 "버티면서 역킬도 가능한 벽"으로
+    // 탱커: "잘 버티면서 이길 수는 있지만, 항상 이기진 않는다" 쪽으로 조정
     private static final Character TANK = new Character(
             "Tank",
-            165,   // HP: 150 → 165 (탱커 정체성 강화)
-            36,    // ATK: 30 → 36 (맞기만 하는 게 아니라 어느 정도 패는 딜)
-            40,    // DEF: 그대로, 방어벽
-            18,    // SPD: 10 → 18 (여전히 느리지만, 아예 턴을 못 가져가진 않게)
+            165,   // HP: 그대로
+            32,    // ATK: 36 -> 32 (딜 약간 너프)
+            40,    // DEF
+            16,    // SPD: 18 -> 16 (조금 더 느리게)
             0.05   // CRIT
     );
 
-    // 스피드러너: 속도로 이득 보는 캐릭, 딜은 살짝 조정
+    // 스피드러너: 속도로 먹고 사는 캐릭, 살짝 상향
     private static final Character SPEEDSTER = new Character(
             "Speedster",
             100,   // HP
-            38,    // ATK: 40 → 38 (조금 너프)
+            40,    // ATK: 38 -> 40 (조금 버스트 강화)
             15,    // DEF
-            32,    // SPD: 여전히 매우 빠름 (정체성 유지)
+            32,    // SPD
             0.15   // CRIT
     );
 
-    // 서스테이너: 나중에 회복/흡혈 스킬 붙을 예정이라, 지금은 기초 스펙 보정
+    // 서스테이너: 나중에 회복/흡혈 스킬 붙을 예정이라, 지금 기본 스펙 확실히 보정
     private static final Character SUSTAINER = new Character(
             "Sustainer",
-            125,   // HP: 120 → 125
-            36,    // ATK: 35 → 36 (딜 조금 상향)
-            22,    // DEF: 20 → 22
-            24,    // SPD: 20 → 24 (너무 굼뜨지 않게)
-            0.08   // CRIT: 0.05 → 0.08
+            130,   // HP: 125 -> 130
+            40,    // ATK: 36 -> 40 (딜 꽤 올려줌)
+            24,    // DEF: 22 -> 24
+            26,    // SPD: 24 -> 26
+            0.12   // CRIT: 0.08 -> 0.12
     );
 
-    // 하이브리드: 종합 능력치가 너무 높았으니, 전체적으로 살짝 너프
+    // 하이브리드: 만능형이지만, 지나치게 강하지 않도록 전체적으로 소폭 너프
     private static final Character HYBRID = new Character(
             "Hybrid",
-            110,   // HP: 그대로
-            48,    // ATK: 50 → 48
+            110,   // HP
+            46,    // ATK: 48 -> 46
             20,    // DEF
-            24,    // SPD: 25 → 24
-            0.18   // CRIT: 0.20 → 0.18
+            22,    // SPD: 24 -> 22
+            0.16   // CRIT: 0.18 -> 0.16
     );
 
     private PresetCharacters() {
-        // 인스턴스 생성 방지
     }
 
     public static Character bruiser() {
@@ -95,9 +94,6 @@ public final class PresetCharacters {
         return HYBRID;
     }
 
-    /**
-     * 1대1 메타 밸런스 분석용 6 아키타입 전체 목록.
-     */
     public static List<Character> metaArchetypes() {
         return Arrays.asList(
                 BRUISER,
