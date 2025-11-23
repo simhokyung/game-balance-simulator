@@ -12,10 +12,10 @@ class PresetCharactersTest {
         Character bruiser = PresetCharacters.bruiser();
 
         assertEquals("Bruiser", bruiser.getName());
-        assertEquals(130, bruiser.getMaxHp());
-        assertEquals(45, bruiser.getAttack());
-        assertEquals(25, bruiser.getDefense());
-        assertEquals(18, bruiser.getSpeed());
+        assertEquals(128, bruiser.getMaxHp());
+        assertEquals(44, bruiser.getAttack());
+        assertEquals(24, bruiser.getDefense());
+        assertEquals(20, bruiser.getSpeed());
         assertEquals(0.10, bruiser.getCritChance(), 1e-9);
     }
 
