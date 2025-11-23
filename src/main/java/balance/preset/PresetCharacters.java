@@ -1,6 +1,8 @@
 package balance.preset;
 
 import balance.domain.Character;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 1대1 전투용 6개 캐릭터 아키타입 프리셋 모음.
@@ -24,9 +26,9 @@ public final class PresetCharacters {
      *
      * HP 130 / ATK 45 / DEF 25 / SPD 18 / CRIT 0.10
      */
-    public static Character bruiser() {
-        return new Character("Bruiser", 130, 45, 25, 18, 0.10);
-    }
+    private static final Character BRUISER = new Character(
+            "Bruiser", 130, 45, 25, 18, 0.10
+    );
 
     /**
      * ⭐ 어쌔신(Assassin) — 원턴킬 폭발형 (Burst)
@@ -35,9 +37,9 @@ public final class PresetCharacters {
      *
      * HP 90 / ATK 60 / DEF 10 / SPD 35 / CRIT 0.25
      */
-    public static Character assassin() {
-        return new Character("Assassin", 90, 60, 10, 35, 0.25);
-    }
+    private static final Character ASSASSIN = new Character(
+            "Assassin", 90, 60, 10, 35, 0.25
+    );
 
     /**
      * ⭐ 탱커(Tank) — 방어벽 (Iron Wall)
@@ -46,9 +48,9 @@ public final class PresetCharacters {
      *
      * HP 150 / ATK 30 / DEF 40 / SPD 10 / CRIT 0.05
      */
-    public static Character tank() {
-        return new Character("Tank", 150, 30, 40, 10, 0.05);
-    }
+    private static final Character TANK = new Character(
+            "Tank", 150, 30, 40, 10, 0.05
+    );
 
     /**
      * ⭐ 스피드러너(Speedster) — 순수 속도형
@@ -57,9 +59,9 @@ public final class PresetCharacters {
      *
      * HP 100 / ATK 40 / DEF 15 / SPD 32 / CRIT 0.15
      */
-    public static Character speedster() {
-        return new Character("Speedster", 100, 40, 15, 32, 0.15);
-    }
+    private static final Character SPEEDSTER = new Character(
+            "Speedster", 100, 40, 15, 32, 0.15
+    );
 
     /**
      * ⭐ 서스테이너(Sustainer) — 지속전/흡혈형
@@ -72,9 +74,9 @@ public final class PresetCharacters {
      *   현재는 "지속형 스탯만 잡아둔 상태"이며,
      *   나중에 패시브/스킬로 회복 효과를 붙일 예정.
      */
-    public static Character sustainer() {
-        return new Character("Sustainer", 120, 35, 20, 20, 0.05);
-    }
+    private static final Character SUSTAINER = new Character(
+            "Sustainer", 120, 35, 20, 20, 0.05
+    );
 
     /**
      * ⭐ 하이브리드(Hybrid) — 메타 파괴형 조합 캐릭
@@ -83,7 +85,50 @@ public final class PresetCharacters {
      *
      * HP 110 / ATK 50 / DEF 20 / SPD 25 / CRIT 0.20
      */
-    public static Character hybrid() {
-        return new Character("Hybrid", 110, 50, 20, 25, 0.20);
+
+    private static final Character HYBRID = new Character(
+            "Hybrid", 110, 50, 20, 25, 0.20
+    );
+
+
+
+    public static Character bruiser() {
+        return BRUISER;
     }
+
+    public static Character assassin() {
+        return ASSASSIN;
+    }
+
+    public static Character tank() {
+        return TANK;
+    }
+
+    public static Character speedster() {
+        return SPEEDSTER;
+    }
+
+    public static Character sustainer() {
+        return SUSTAINER;
+    }
+
+    public static Character hybrid() {
+        return HYBRID;
+    }
+
+    /**
+     * 1대1 메타 분석용 6 아키타입 전체 반환.
+     */
+    public static List<Character> metaArchetypes() {
+        return Arrays.asList(
+                BRUISER,
+                ASSASSIN,
+                TANK,
+                SPEEDSTER,
+                SUSTAINER,
+                HYBRID
+        );
+    }
+
+
 }
