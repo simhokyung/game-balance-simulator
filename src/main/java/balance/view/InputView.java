@@ -35,6 +35,26 @@ public class InputView {
         return characters;
     }
 
+    public int readScenarioMode() {
+        System.out.println("모드를 선택하세요:");
+        System.out.println("1: 미리 준비된 프리셋 시나리오 사용");
+        System.out.println("2: 직접 캐릭터 스펙 입력");
+        System.out.print("메뉴 번호를 입력하세요 (1-2): ");
+
+        return readIntInRange(1, 2, "메뉴 번호는 1 또는 2여야 합니다.");
+    }
+
+    public int readPresetScenarioChoice() {
+        System.out.println("프리셋 시나리오를 선택하세요:");
+        System.out.println("1: 기본 롤 조합 (Warrior / Assassin / Tank / Mage)");
+        System.out.println("2: 극단 비교 (GlassCannon / IronWall / Balanced / Speedster)");
+        System.out.print("시나리오 번호를 입력하세요 (1-2): ");
+
+        return readIntInRange(1, 2, "시나리오 번호는 1 또는 2여야 합니다.");
+    }
+
+
+
     public int readRoundsPerPair() {
         System.out.print("각 캐릭터 조합당 전투 횟수(라운드 수)를 입력하세요 (예: 20): ");
         return readIntAtLeast(1, "전투 횟수는 1 이상이어야 합니다.");
@@ -57,6 +77,26 @@ public class InputView {
             }
         }
     }
+
+
+    private int readIntInRange(int min, int max, String errorMessage) {
+        while (true) {
+            String line = scanner.nextLine();
+            try {
+                int value = Integer.parseInt(line.trim());
+                if (value < min || value > max) {
+                    System.out.println("[ERROR] " + errorMessage);
+                    System.out.print("다시 입력해 주세요: ");
+                    continue;
+                }
+                return value;
+            } catch (NumberFormatException e) {
+                System.out.println("[ERROR] 정수를 입력해야 합니다.");
+                System.out.print("다시 입력해 주세요: ");
+            }
+        }
+    }
+
 
     // 테스트를 위해 분리한 파싱 로직
     static Character parseCharacterLine(String line) {
@@ -83,4 +123,7 @@ public class InputView {
             throw new IllegalArgumentException("HP/ATK/DEF/SPD는 정수, CRIT는 실수(double)로 입력해야 합니다.");
         }
     }
+
+
+
 }

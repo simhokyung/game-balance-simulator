@@ -8,6 +8,7 @@ import balance.simulation.CharacterStats;
 import balance.simulation.SimulationService;
 import balance.view.BalanceReportPrinter;
 import balance.view.InputView;
+import balance.scenario.PresetScenarios;
 
 import java.util.List;
 import java.util.Map;
@@ -18,12 +19,28 @@ public class Application {
         InputView inputView = new InputView();
 
         System.out.println("=== Game Balance Simulator ===");
-        System.out.println("시뮬레이션할 캐릭터를 입력해 주세요.");
         System.out.println();
 
-        // 1. 사용자로부터 캐릭터 목록과 라운드 수를 입력받기
-        List<Character> characters = inputView.readCharacters();
-        int roundsPerPair = inputView.readRoundsPerPair();
+        int mode = inputView.readScenarioMode();
+
+        List<Character> characters;
+        int roundsPerPair;
+
+        if (mode == 1) {
+            int scenarioChoice = inputView.readPresetScenarioChoice();
+            if (scenarioChoice == 1) {
+                characters = balance.scenario.PresetScenarios.basicRoles();
+            } else {
+                characters = balance.scenario.PresetScenarios.extremeComparison();
+            }
+            roundsPerPair = inputView.readRoundsPerPair();
+        } else {
+            System.out.println();
+            System.out.println("[직접 입력 모드] 시뮬레이션할 캐릭터를 입력해 주세요.");
+            System.out.println();
+            characters = inputView.readCharacters();
+            roundsPerPair = inputView.readRoundsPerPair();
+        }
 
         // 2. 전투/시뮬레이션/분석 구성
         BattleSimulator battleSimulator = new BattleSimulator();        // 랜덤 기반 전투 엔진
