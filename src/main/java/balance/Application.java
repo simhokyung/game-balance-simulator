@@ -10,6 +10,7 @@ import balance.simulation.SimulationService;
 import balance.view.BalanceReportPrinter;
 import balance.view.InputView;
 import balance.scenario.PresetScenarios;
+import balance.skill.PresetSkillSetProvider;
 
 import java.util.List;
 import java.util.Map;
@@ -48,10 +49,11 @@ public class Application {
             roundsPerPair = inputView.readRoundsPerPair();
         }
 
-        // 2. 전투/시뮬레이션/분석 구성
-        BattleSimulator battleSimulator = new BattleSimulator();
+// 2. 전투/시뮬레이션/분석 구성
+        BattleSimulator battleSimulator =
+                new BattleSimulator(new PresetSkillSetProvider());      // 프리셋 스킬 적용 전투 엔진
         SimulationService simulationService = new SimulationService(battleSimulator);
-        BalanceAnalyzer balanceAnalyzer = new BalanceAnalyzer();
+        BalanceAnalyzer balanceAnalyzer = new BalanceAnalyzer();        // 기본 임계값 사용
         BalanceReportPrinter printer = new BalanceReportPrinter();
 
         // 3. 전체 리그 시뮬레이션 실행
