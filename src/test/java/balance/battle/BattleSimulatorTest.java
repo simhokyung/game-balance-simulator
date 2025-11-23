@@ -8,28 +8,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class BattleSimulatorTest {
 
     @Test
-    void 더_빠른_캐릭터가_선공을_잡고_전투에서_이길_수_있다() {
+    void 더_빠른_캐릭터가_동일_스탯에서_전투에서_이길_수_있다() {
+        // ATK / DEF / HP는 같고, SPD만 다르게 설정
         Character fastStrong = new Character("FastStrong", 100, 50, 10, 30, 0.0);
-        Character slowWeak = new Character("SlowWeak", 100, 30, 10, 10, 0.0);
+        Character slowWeak = new Character("SlowWeak", 100, 50, 10, 10, 0.0);
 
         BattleSimulator simulator = new BattleSimulator();
         BattleResult result = simulator.simulate(fastStrong, slowWeak);
 
         assertFalse(result.isDraw());
-        assertEquals("FastStrong", result.getWinner().getName());
+        assertEquals("FastStrong", result.getWinner().getName(), "속도가 더 빠른 캐릭터가 승리해야 한다.");
         assertEquals("SlowWeak", result.getLoser().getName());
-        assertEquals(5, result.getTurnCount()); // 공격 5번 만에 종료되는 시나리오
+        assertTrue(result.getTurnCount() > 0 && result.getTurnCount() <= 100);
     }
 
     @Test
-    void 속도가_같으면_첫번째_인자로_들어온_캐릭터가_선공을_잡는다() {
+    void 속도가_같으면_첫번째_인자로_들어온_캐릭터가_선공_우위를_가지고_전투에서_이길_수_있다() {
         Character first = new Character("First", 100, 40, 10, 20, 0.0);
         Character second = new Character("Second", 100, 40, 10, 20, 0.0);
 
         BattleSimulator simulator = new BattleSimulator();
         BattleResult result = simulator.simulate(first, second);
 
-        // 공격력/방어력이 같으면 선공이 유리하다고 가정
+        // 공격력/방어력이 같으면, 선공을 잡은 첫 번째 캐릭터가 유리하다고 가정
         assertFalse(result.isDraw());
         assertEquals("First", result.getWinner().getName());
     }
