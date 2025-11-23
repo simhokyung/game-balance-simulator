@@ -7,34 +7,34 @@ import java.util.List;
 
 public final class PresetCharacters {
 
-    // 브루저: 기준 캐릭터 (살짝 상향해서 진짜 "평균" 축)
+    // Bruiser: 여전히 기준 캐릭, 하지만 승률 90%는 말이 안 되니 살짝 너프
     private static final Character BRUISER = new Character(
             "Bruiser",
-            130,   // HP
-            47,    // ATK: 45 -> 47 (조금 더 때리게)
-            25,    // DEF
-            22,    // SPD: 20 -> 22 (턴 주기 살짝 개선)
-            0.10   // CRIT
+            128,   // 130 -> 128
+            44,    // 47 -> 44
+            24,    // 25 -> 24
+            20,    // 22 -> 20
+            0.10
     );
 
-    // 어쌔신: 여전히 폭딜 + 고속, 하지만 너무 압도적이지 않게 너프
+    // Assassin: 너무 죽어서, 진짜 “짧게 강한 폭딜”로 상향
     private static final Character ASSASSIN = new Character(
             "Assassin",
-            80,    // HP: 85 -> 80 (진짜 유리몸 느낌 강화)
-            48,    // ATK: 52 -> 48
-            10,    // DEF
-            28,    // SPD: 30 -> 28
-            0.18   // CRIT: 0.20 -> 0.18
+            90,    // 80 -> 90 (조금 더 안 죽게)
+            50,    // 48 -> 50
+            10,
+            29,    // 28 -> 29
+            0.20   // 0.18 -> 0.20
     );
 
-    // 탱커: "잘 버티면서 이길 수는 있지만, 항상 이기진 않는다" 쪽으로 조정
+    // 탱커: 너무 못 싸우니, 딜/속도를 조금만 올림
     private static final Character TANK = new Character(
             "Tank",
-            165,   // HP: 그대로
-            32,    // ATK: 36 -> 32 (딜 약간 너프)
-            40,    // DEF
-            16,    // SPD: 18 -> 16 (조금 더 느리게)
-            0.05   // CRIT
+            165,
+            36,    // 32 -> 36
+            40,
+            20,    // 16 -> 20
+            0.05
     );
 
     // 스피드러너: 속도로 먹고 사는 캐릭, 살짝 상향
@@ -47,14 +47,14 @@ public final class PresetCharacters {
             0.15   // CRIT
     );
 
-    // 서스테이너: 나중에 회복/흡혈 스킬 붙을 예정이라, 지금 기본 스펙 확실히 보정
+    // 서스테이너: 지금 거의 브루저 상위호환이라 확실히 너프
     private static final Character SUSTAINER = new Character(
             "Sustainer",
-            130,   // HP: 125 -> 130
-            40,    // ATK: 36 -> 40 (딜 꽤 올려줌)
-            24,    // DEF: 22 -> 24
-            26,    // SPD: 24 -> 26
-            0.12   // CRIT: 0.08 -> 0.12
+            128,   // 130 -> 128
+            37,    // 40 -> 37
+            23,    // 24 -> 23
+            24,    // 26 -> 24
+            0.10   // 0.12 -> 0.10
     );
 
     // 하이브리드: 만능형이지만, 지나치게 강하지 않도록 전체적으로 소폭 너프
