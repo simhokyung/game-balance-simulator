@@ -1,10 +1,9 @@
 package balance.skill;
 
 import balance.domain.Character;
-import balance.skill.bruiser.BruiserFortitudePassive;
-import balance.skill.bruiser.BruiserLastStandSkill;
-import balance.skill.bruiser.BruiserRallyStrikeSkill;
 
+import balance.skill.bruiser.BruiserRageSkill;
+import balance.skill.bruiser.BruiserSecondWindSkill;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,16 +30,17 @@ public class PresetSkillSetProvider implements SkillSetProvider {
             return Collections.emptyList();
         }
 
-        // 이름으로 매칭 (대소문자 구분 없이)
+        // ✅ Bruiser: 분노 스택 + 분노 폭발 + 근성(Second Wind)
         if ("bruiser".equalsIgnoreCase(name)) {
             return List.of(
-                    new BruiserFortitudePassive(),
-                    new BruiserRallyStrikeSkill(),
-                    new BruiserLastStandSkill()
+                    new BruiserRageSkill(),
+                    new BruiserSecondWindSkill()
             );
         }
 
-        // TODO: Assassin / Tank / Speedster / Sustainer / Hybrid 스킬 연결 예정
+
+
+        // TODO: Assassin / Tank / Speedster / Hybrid 스킬은 이후 단계에서 추가
         return Collections.emptyList();
     }
 }
