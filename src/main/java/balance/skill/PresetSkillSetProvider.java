@@ -4,6 +4,7 @@ import balance.domain.Character;
 
 import balance.skill.bruiser.BruiserRageSkill;
 import balance.skill.bruiser.BruiserSecondWindSkill;
+import balance.skill.sustainer.SustainerSkills;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,6 +39,10 @@ public class PresetSkillSetProvider implements SkillSetProvider {
             );
         }
 
+
+        if ("Sustainer".equalsIgnoreCase(name)) {
+            return Collections.singletonList(new SustainerSkills());
+        }
 
 
         // TODO: Assassin / Tank / Speedster / Hybrid 스킬은 이후 단계에서 추가
