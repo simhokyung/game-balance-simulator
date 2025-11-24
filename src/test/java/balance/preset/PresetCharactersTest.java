@@ -13,7 +13,7 @@ class PresetCharactersTest {
 
         assertEquals("Bruiser", bruiser.getName());
         assertEquals(128, bruiser.getMaxHp());
-        assertEquals(44, bruiser.getAttack());
+        assertEquals(40, bruiser.getAttack());
         assertEquals(24, bruiser.getDefense());
         assertEquals(20, bruiser.getSpeed());
         assertEquals(0.10, bruiser.getCritChance(), 1e-9);
