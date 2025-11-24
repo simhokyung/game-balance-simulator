@@ -8,6 +8,12 @@ import balance.skill.bruiser.BruiserRagePassiveSkill;
 import balance.skill.bruiser.BruiserRageState;
 import balance.skill.bruiser.BruiserRagingBlowSkill;
 import balance.skill.bruiser.BruiserSecondWindSkill;
+import balance.skill.hybrid.HybridBalancedInstinctSkill;
+import balance.skill.hybrid.HybridExposePatternSkill;
+import balance.skill.hybrid.HybridTacticalFocusSkill;
+import balance.skill.speedster.SpeedsterPreciseDodgeSkill;
+import balance.skill.speedster.SpeedsterQuickComboSkill;
+import balance.skill.speedster.SpeedsterQuickFootworkSkill;
 import balance.skill.sustainer.SustainerBloodFrenzySkill;
 import balance.skill.sustainer.SustainerLifestealSkill;
 import balance.skill.sustainer.SustainerRegenSkill;
@@ -79,7 +85,25 @@ public class PresetSkillSetProvider implements SkillSetProvider {
             );
         }
 
-        // TODO: Speedster / Hybrid 스킬은 이후 단계에서 추가
+
+        // ✅ Speedster: 가속 + 더블 액션 + 예측 회피
+        if ("Speedster".equalsIgnoreCase(name)) {
+            return List.of(
+                    new SpeedsterQuickFootworkSkill(),
+                    new SpeedsterQuickComboSkill(),
+                    new SpeedsterPreciseDodgeSkill()
+            );
+        }
+
+        // ✅ Hybrid: 균형 감각 + 전술적 집중 + 약점 분석
+        if ("Hybrid".equalsIgnoreCase(name)) {
+            return List.of(
+                    new HybridBalancedInstinctSkill(),
+                    new HybridTacticalFocusSkill(),
+                    new HybridExposePatternSkill()
+            );
+        }
+
         return Collections.emptyList();
     }
 }

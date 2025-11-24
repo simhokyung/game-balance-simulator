@@ -24,9 +24,9 @@ class AssassinSkillsTest {
         AssassinExposedWeaknessSkill skill = new AssassinExposedWeaknessSkill();
 
         // 상대 HP를 50%까지 깎아놓는다 (200 → 100)
-        opponent.takeDamage(100);
+        opponent.takeDamage(180);
         int hpBefore = opponent.getCurrentHp();
-        assertEquals(100, hpBefore);
+        assertEquals(20, hpBefore);
 
         SkillContext context = new SkillContext(self, opponent);
 
@@ -34,8 +34,8 @@ class AssassinSkillsTest {
         int baseDamage = 100;
         skill.onAfterAttack(context, baseDamage);
 
-        // then: 추가 피해 10% → 10
-        int expectedExtra = (int) Math.round(baseDamage * 0.10);
+        // then: 추가 피해 5% → 10
+        int expectedExtra = (int) Math.round(baseDamage * 0.05);
         assertEquals(hpBefore - expectedExtra, opponent.getCurrentHp());
     }
 
