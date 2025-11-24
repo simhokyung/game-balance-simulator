@@ -11,7 +11,7 @@ public final class PresetCharacters {
     private static final Character BRUISER = new Character(
             "Bruiser",
             128,   // HP: 130 -> 128 (살짝 감소)
-            44,    // ATK: 48 -> 44 (딜 꽤 너프)
+            40,    // ATK: 48 -> 40 (딜 꽤 너프)
             24,    // DEF: 그대로
             20,    // SPD: 22 -> 20 (턴 주기 너프)
             0.10   // CRIT: 0.12 -> 0.10
