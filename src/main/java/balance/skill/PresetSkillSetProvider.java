@@ -1,6 +1,9 @@
 package balance.skill;
 
 import balance.domain.Character;
+import balance.skill.assassin.AssassinExposedWeaknessSkill;
+import balance.skill.assassin.AssassinOpeningStrikeSkill;
+import balance.skill.assassin.AssassinShadowEvasionSkill;
 import balance.skill.bruiser.BruiserRagePassiveSkill;
 import balance.skill.bruiser.BruiserRageState;
 import balance.skill.bruiser.BruiserRagingBlowSkill;
@@ -52,6 +55,15 @@ public class PresetSkillSetProvider implements SkillSetProvider {
                     new SustainerLifestealSkill(),
                     new SustainerRegenSkill(),
                     new SustainerBloodFrenzySkill()
+            );
+        }
+
+        // ✅ Assassin: 약점포착 패시브 + 연막 + 선제일격
+        if ("Assassin".equalsIgnoreCase(name)) {
+            return List.of(
+                    new AssassinExposedWeaknessSkill(),
+                    new AssassinShadowEvasionSkill(),
+                    new AssassinOpeningStrikeSkill()
             );
         }
 

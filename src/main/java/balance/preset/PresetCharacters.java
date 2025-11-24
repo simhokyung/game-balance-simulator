@@ -17,13 +17,13 @@ public final class PresetCharacters {
             0.10   // CRIT: 0.12 -> 0.10
     );
 
-    // 어쌔신: 직전 패치 그대로 유지
+    // 어쌔신: (너프)
     private static final Character ASSASSIN = new Character(
             "Assassin",
-            90,
-            50,
+            87, // HP 90->87로 너프
+            48, //ATK 50->48로 너프
             10,
-            29,
+            28, //SPD 29->28로 너프
             0.22
     );
 

@@ -16,8 +16,8 @@ import balance.skill.SkillContext;
  */
 public class AssassinExposedWeaknessSkill implements Skill {
 
-    private static final double HP_THRESHOLD = 0.5;        // 상대 HP 50% 이하일 때 발동
-    private static final double BONUS_DAMAGE_RATIO = 0.10; // 추가 피해 10%
+    private static final double HP_THRESHOLD = 0.3;        // 상대 HP 50% 이하일 때 발동 ->30%로 너프
+    private static final double BONUS_DAMAGE_RATIO = 0.05; // 추가 피해 10% -> 5%로 너프
 
     @Override
     public void onAfterAttack(SkillContext context, int damageDealt) {
