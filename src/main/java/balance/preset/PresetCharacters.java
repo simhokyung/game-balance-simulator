@@ -57,11 +57,11 @@ public final class PresetCharacters {
             0.10
     );
 
-    // 하이브리드: 직전 패치 그대로 유지
+    // 하이브리드:
     private static final Character HYBRID = new Character(
             "Hybrid",
             110,
-            46,
+            44, // 46 -> 44너프
             20,
             22,
             0.16
@@ -104,4 +104,7 @@ public final class PresetCharacters {
                 HYBRID
         );
     }
+
+
+
 }
