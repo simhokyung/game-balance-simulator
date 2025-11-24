@@ -5,17 +5,17 @@ import balance.skill.Skill;
 import balance.skill.SkillContext;
 
 /**
- * 브루저 스킬 - 근성(Second Wind)
+ * 브루저 스킬 - 근성(Second Wind) (너프 버전)
  *
- * - 전투 중 자신의 HP가 처음으로 30% 이하로 떨어질 때 1회 발동한다.
- *   - 즉시 최대 체력의 20%를 회복하고,
- *   - 이후 2턴 동안 받은 피해의 10%를 다시 회복(= 실질적인 피해 감소 효과).
+ * - 전투 중 자신의 HP가 처음으로 25% 이하로 떨어질 때 1회 발동한다.
+ *   - 즉시 최대 체력의 15%를 회복하고,
+ *   - 이후 1턴 동안 받은 피해의 5%를 다시 회복한다.
  */
 public class BruiserSecondWindSkill implements Skill {
 
-    private static final double HP_THRESHOLD_RATIO = 0.30;   // 30%
-    private static final double HEAL_RATIO = 0.20;           // 최대 체력의 20% 회복
-    private static final double DAMAGE_REDUCTION_HEAL = 0.10; // 받은 피해의 10% 회복
+    private static final double HP_THRESHOLD_RATIO = 0.25;     // 25%
+    private static final double HEAL_RATIO = 0.15;             // 최대 체력의 15% 회복
+    private static final double DAMAGE_REDUCTION_HEAL = 0.05;  // 받은 피해의 5% 회복
 
     private boolean triggered = false;
     private int damageReductionTurnsRemaining = 0;
@@ -41,17 +41,17 @@ public class BruiserSecondWindSkill implements Skill {
         int maxHp = self.getCharacter().getMaxHp();
         int currentHp = self.getCurrentHp();
 
-        // 1) 아직 한 번도 발동하지 않았고, 현재 HP가 30% 이하로 떨어졌다면 발동
+        // 1) 아직 한 번도 발동하지 않았고, 현재 HP가 25% 이하로 떨어졌다면 발동
         if (!triggered && currentHp <= maxHp * HP_THRESHOLD_RATIO) {
             triggered = true;
 
             int healAmount = (int) Math.max(1, Math.round(maxHp * HEAL_RATIO));
             self.heal(healAmount);
 
-            damageReductionTurnsRemaining = 2;
+            damageReductionTurnsRemaining = 1;
         }
 
-        // 2) 피해 감소 효과가 남아 있을 때는 받은 피해의 일부를 회복 (= 실질적인 피해 감소)
+        // 2) 피해 감소 효과가 남아 있을 때는 받은 피해 일부를 회복
         if (damageReductionTurnsRemaining > 0) {
             int healFromDamage = (int) Math.max(1, Math.round(damageTaken * DAMAGE_REDUCTION_HEAL));
             self.heal(healFromDamage);
