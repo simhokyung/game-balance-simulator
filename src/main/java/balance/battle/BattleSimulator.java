@@ -40,21 +40,26 @@ public class BattleSimulator {
         this.skillSetProvider = Objects.requireNonNull(skillSetProvider, "skillSetProvider는 null일 수 없습니다.");
     }
 
-    //  새로 추가: 스킬셋 프로바이더만 넘기는 생성자
+    // 스킬셋 프로바이더만 넘기는 생성자
     public BattleSimulator(SkillSetProvider skillSetProvider) {
         this(new DefaultRandomProvider(), new DefaultDamageCalculator(), skillSetProvider);
     }
 
-
     public BattleResult simulate(Character first, Character second) {
-        // ★ 여기에서 캐릭터별 스킬 세트를 조회해서 BattleCharacter에 주입
-        BattleCharacter firstBattle = BattleCharacter.from(first, skillSetProvider.getSkillsFor(first));
-        BattleCharacter secondBattle = BattleCharacter.from(second, skillSetProvider.getSkillsFor(second));
+        // 캐릭터별 스킬 세트 주입
+        BattleCharacter firstBattle =
+                BattleCharacter.from(first, skillSetProvider.getSkillsFor(first));
+        BattleCharacter secondBattle =
+                BattleCharacter.from(second, skillSetProvider.getSkillsFor(second));
 
         double firstGauge = 0.0;
         double secondGauge = 0.0;
 
         int turn = 0;
+
+        // 🔥 전투 내 "첫 공격 여부" 추적용 플래그
+        boolean firstHasAttackedOnce = false;
+        boolean secondHasAttackedOnce = false;
 
         while (turn < MAX_TURNS) {
             turn++;
@@ -78,6 +83,7 @@ public class BattleSimulator {
                 defender = firstBattle;
                 secondGauge -= ACTION_THRESHOLD;
             } else {
+                // 게이지 동률이면 SPD가 더 높은 쪽, 같으면 first 우선
                 if (first.getSpeed() >= second.getSpeed()) {
                     attacker = firstBattle;
                     defender = secondBattle;
@@ -89,9 +95,17 @@ public class BattleSimulator {
                 }
             }
 
+            // ✅ 이 공격이 "해당 캐릭터의 전투 첫 공격"인지 계산
+            boolean isFirstAttackInBattle;
+            if (attacker == firstBattle) {
+                isFirstAttackInBattle = !firstHasAttackedOnce;
+            } else {
+                isFirstAttackInBattle = !secondHasAttackedOnce;
+            }
+
             // ===== 스킬 훅: 턴 시작 / 공격 전 =====
             triggerOnTurnStart(attacker, defender);
-            triggerOnBeforeAttack(attacker, defender);
+            triggerOnBeforeAttack(attacker, defender, isFirstAttackInBattle);
 
             // 데미지 계산
             int damage = damageCalculator.calculateDamage(attacker, defender, randomProvider);
@@ -114,6 +128,13 @@ public class BattleSimulator {
                     );
                 }
             }
+
+            // ✅ 공격이 끝난 뒤, 해당 캐릭터가 "한 번 이상 공격함" 표시
+            if (attacker == firstBattle) {
+                firstHasAttackedOnce = true;
+            } else {
+                secondHasAttackedOnce = true;
+            }
         }
 
         return BattleResult.draw(turn);
@@ -132,8 +153,14 @@ public class BattleSimulator {
         }
     }
 
-    private void triggerOnBeforeAttack(BattleCharacter acting, BattleCharacter opponent) {
-        SkillContext context = new SkillContext(acting, opponent);
+    /**
+     * 이제 onBeforeAttack 에서는
+     * "이 공격이 전투 내 첫 공격인지" 여부를 함께 넘겨준다.
+     */
+    private void triggerOnBeforeAttack(BattleCharacter acting,
+                                       BattleCharacter opponent,
+                                       boolean firstAttackInBattle) {
+        SkillContext context = new SkillContext(acting, opponent, firstAttackInBattle);
         for (Skill skill : acting.getSkills()) {
             skill.onBeforeAttack(context);
         }
