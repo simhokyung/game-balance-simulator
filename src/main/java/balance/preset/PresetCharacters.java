@@ -11,7 +11,7 @@ public final class PresetCharacters {
     private static final Character BRUISER = new Character(
             "Bruiser",
             128,   // HP: 130 -> 128 (살짝 감소)
-            40,    // ATK: 48 -> 40 (딜 꽤 너프)
+            42,    // ATK: 48 -> 42 (딜 꽤 너프)
             24,    // DEF: 그대로
             20,    // SPD: 22 -> 20 (턴 주기 너프)
             0.10   // CRIT: 0.12 -> 0.10
@@ -31,8 +31,8 @@ public final class PresetCharacters {
     private static final Character TANK = new Character(
             "Tank",
             150,   // HP: 158 -> 150 (HP 너프)
-            30,    // ATK: 35 -> 30 (딜 너프)
-            38,    // DEF: 그대로
+            31,    // ATK: 35 -> 31 (딜 너프)
+            39,    // DEF: 38 -> 39 (방어력 버프)
             17,    // SPD: 19 -> 17 (스피드 미세 너프)
             0.05
     );
@@ -53,7 +53,7 @@ public final class PresetCharacters {
             128,
             37,
             23,
-            24,
+            23, //24->23 너프
             0.10
     );
 
