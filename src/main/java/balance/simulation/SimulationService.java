@@ -138,4 +138,42 @@ public class SimulationService {
             throw new IllegalArgumentException("시뮬레이션 횟수는 1 이상이어야 합니다.");
         }
     }
+
+    /**
+     * 캐릭터 리스트에 대해 모든 1:1 조합의 승/무/패를 계산하고,
+     * 행/열 매트릭스로 정리해서 반환한다.
+     *
+     * 행 i, 열 j 셀은 "i번째 캐릭터가 j번째 캐릭터를 이길 확률"을 의미한다.
+     */
+    public MatchupMatrix simulateMatrix(List<Character> characters,
+                                        int roundsPerPair) {
+        if (characters == null || characters.size() < 2) {
+            throw new IllegalArgumentException("시뮬레이션할 캐릭터는 최소 2명 이상이어야 합니다.");
+        }
+        validateRounds(roundsPerPair);
+
+        int size = characters.size();
+        int[][] wins = new int[size][size];
+        int[][] draws = new int[size][size];
+
+        for (int i = 0; i < size; i++) {
+            Character first = characters.get(i);
+            for (int j = i + 1; j < size; j++) {
+                Character second = characters.get(j);
+
+                MatchupResult matchupResult = simulateMatchup(first, second, roundsPerPair);
+
+                // i가 j를 이긴 횟수 / j가 i를 이긴 횟수
+                wins[i][j] = matchupResult.getFirstWins();
+                wins[j][i] = matchupResult.getSecondWins();
+
+                // 무승부는 양쪽 셀에 동일하게 기록
+                draws[i][j] = matchupResult.getDraws();
+                draws[j][i] = matchupResult.getDraws();
+            }
+        }
+
+        return new MatchupMatrix(characters, wins, draws, roundsPerPair);
+    }
 }
+

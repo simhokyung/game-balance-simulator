@@ -61,6 +61,19 @@ public class InputView {
         return readIntAtLeast(1, "전투 횟수는 1 이상이어야 합니다.");
     }
 
+
+    public boolean askShowMatchupDetails() {
+        System.out.println();
+        System.out.println("캐릭터별 매치업 승률 상세를 확인하시겠습니까?");
+        System.out.println("1: 예");
+        System.out.println("2: 아니오");
+        System.out.print("번호를 입력하세요 (1-2): ");
+
+        int choice = readIntInRange(1, 2, "메뉴 번호는 1 또는 2여야 합니다.");
+        return choice == 1;
+    }
+
+
     private int readIntAtLeast(int min, String errorMessage) {
         while (true) {
             String line = scanner.nextLine();

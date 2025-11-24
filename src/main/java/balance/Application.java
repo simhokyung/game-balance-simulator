@@ -6,12 +6,14 @@ import balance.battle.BattleSimulator;
 import balance.domain.Character;
 import balance.preset.PresetCharacters;
 import balance.simulation.CharacterStats;
+import balance.simulation.MatchupMatrix;
 import balance.simulation.SimulationService;
 import balance.view.BalanceReportPrinter;
 import balance.view.InputView;
 import balance.scenario.PresetScenarios;
 import balance.skill.PresetSkillSetProvider;
 
+import balance.view.MatchupMatrixPrinter;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +58,8 @@ public class Application {
         BalanceAnalyzer balanceAnalyzer = new BalanceAnalyzer();        // 기본 임계값 사용
         BalanceReportPrinter printer = new BalanceReportPrinter();
 
+        MatchupMatrixPrinter matrixPrinter = new MatchupMatrixPrinter();
+
         // 3. 전체 리그 시뮬레이션 실행
         Map<Character, CharacterStats> statsByCharacter =
                 simulationService.simulateAll(characters, roundsPerPair);
@@ -65,5 +69,14 @@ public class Application {
 
         // 5. 리포트 출력
         printer.print(statsByCharacter, assessments);
+
+// 6. 매치업 승률 매트릭스는 사용자가 원할 때만 출력
+        boolean showMatchup = inputView.askShowMatchupDetails();
+        if (showMatchup) {
+            MatchupMatrix matchupMatrix =
+                    simulationService.simulateMatrix(characters, roundsPerPair);
+            matrixPrinter.print(matchupMatrix);
+        }
+
     }
 }

@@ -61,7 +61,6 @@ public class BalanceReportPrinter {
                     Character character = assessment.getCharacter();
                     System.out.printf("[%s] %s%n", character.getName(), assessment.getReason());
                 });
-
-        System.out.println("========================================");
+        System.out.println();
     }
 }
