@@ -45,22 +45,57 @@ public class InputView {
         return readIntInRange(1, 2, "메뉴 번호는 1 또는 2여야 합니다.");
     }
 
+    /**
+     * 프리셋 시나리오 선택.
+     * 현재는 1대1 밸런스형 전투 캐릭터 6종만 제공한다.
+     */
     public int readPresetScenarioChoice() {
         System.out.println("프리셋 시나리오를 선택하세요:");
-        System.out.println("1: 기본 전투 롤 4종 (Warrior / Assassin / Tank / Mage)");
-        System.out.println("2: 극단적인 전투 캐릭터 4종 (GlassCannon / IronWall / Balanced / Speedster)");
-        System.out.println("3: 1대1 밸런스형 전투 캐릭터 6종 (Bruiser / Assassin / Tank / Speedster / Sustainer / Hybrid)");
-        System.out.print("시나리오 번호를 입력하세요 (1-3): ");
+        System.out.println("1: 1대1 밸런스형 전투 캐릭터 6종 (Bruiser / Assassin / Tank / Speedster / Sustainer / Hybrid)");
+        System.out.print("시나리오 번호를 입력하세요 (1): ");
         System.out.println();
 
-        return readIntInRange(1, 3, "시나리오 번호는 1, 2 또는 3이어야 합니다.");
+        return readIntInRange(1, 1, "시나리오 번호는 1이어야 합니다.");
+    }
+
+    /**
+     * 메타 6 아키타입 프리셋에서:
+     * 1. 설명 보기
+     * 2. 전투 시작하기
+     */
+    public int readPresetMetaAction() {
+        System.out.println();
+        System.out.println("무엇을 하시겠습니까?");
+        System.out.println("1: 캐릭터별 스탯 / 스킬 설명 보기");
+        System.out.println("2: 전투 시작하기");
+        System.out.print("번호를 입력하세요 (1-2): ");
+
+        return readIntInRange(1, 2, "메뉴 번호는 1 또는 2여야 합니다.");
+    }
+
+    /**
+     * 캐릭터별 설명 보기용 선택 메뉴.
+     * 0을 입력하면 이전 메뉴로 돌아간다.
+     */
+    public int readMetaCharacterInfoChoice() {
+        System.out.println();
+        System.out.println("설명을 보고 싶은 캐릭터를 선택하세요:");
+        System.out.println("1: Bruiser");
+        System.out.println("2: Assassin");
+        System.out.println("3: Tank");
+        System.out.println("4: Speedster");
+        System.out.println("5: Sustainer");
+        System.out.println("6: Hybrid");
+        System.out.println("0: 이전 메뉴로 돌아가기");
+        System.out.print("번호를 입력하세요 (0-6): ");
+
+        return readIntInRange(0, 6, "번호는 0에서 6 사이여야 합니다.");
     }
 
     public int readRoundsPerPair() {
         System.out.print("각 캐릭터 조합당 전투 횟수(라운드 수)를 입력하세요 (예: 20): ");
         return readIntAtLeast(1, "전투 횟수는 1 이상이어야 합니다.");
     }
-
 
     public boolean askShowMatchupDetails() {
         System.out.println();
@@ -72,7 +107,6 @@ public class InputView {
         int choice = readIntInRange(1, 2, "메뉴 번호는 1 또는 2여야 합니다.");
         return choice == 1;
     }
-
 
     private int readIntAtLeast(int min, String errorMessage) {
         while (true) {

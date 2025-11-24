@@ -9,10 +9,6 @@ import balance.skill.SkillContext;
  *
  * - 적의 현재 HP가 30% 이하일 때,
  *   이번 공격으로 입힌 피해의 5%만큼 추가 피해를 준다.
- *
- * 설계상은 "치명타 확률 +5%"이지만,
- * 현재 크리 로직에 직접 개입하기 어렵기 때문에
- * 기대값에 해당하는 고정 추가 피해(+5%)로 구현했다.
  */
 public class AssassinExposedWeaknessSkill implements Skill {
 

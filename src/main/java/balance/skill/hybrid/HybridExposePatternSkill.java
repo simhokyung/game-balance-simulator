@@ -11,8 +11,6 @@ import balance.skill.SkillContext;
  *   적 방어력 10% 무시 → 피해 +10%로 근사.
  * - 쿨타임: 3턴.
  *
- * - 1:1 전투 기준이므로, "같은 대상" 체크는 생략하고
- *   자신의 연속 공격 횟수만 사용한다.
  */
 public class HybridExposePatternSkill implements Skill {
 

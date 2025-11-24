@@ -6,12 +6,7 @@ import balance.skill.SkillContext;
 
 /**
  * Tank 스킬2 - 철의 반격(Spiked Counter)
- *
- * 설계:
- *  - HP 50% 이상일 때, 50% 확률로 받은 피해의 30%를 반사, 쿨타임 3턴
- *
- * 구현:
- *  - 확률 대신 "기댓값"으로 단순화:
+
  *    → HP 50% 이상이고, 쿨타임 0이면 받은 피해의 15%를 확정 반사
  */
 public class TankSpikedCounterSkill implements Skill {

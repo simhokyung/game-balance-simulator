@@ -10,11 +10,6 @@ import balance.skill.SkillContext;
  * - 전투 내 "첫 번째 공격"에 한해 발동.
  * - 그 공격으로 입힌 피해의 40%만큼 추가 피해를 준다.
  *
- * 설계상은:
- *   - 데미지 +40%
- *   - 치명타 시 크리 배수 +0.2
- * 이지만, 현재 크리 배수 정보에 접근하기 어렵기 때문에
- * "첫 공격 시 +40% 추가 피해"로 단순화했다.
  */
 public class AssassinOpeningStrikeSkill implements Skill {
 
