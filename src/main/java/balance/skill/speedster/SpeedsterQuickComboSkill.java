@@ -13,14 +13,14 @@ import balance.skill.SkillContext;
  * - 구현:
  *   - 공격 전마다 actionCount를 증가시킨다.
  *   - 쿨타임이 0이고, actionCount가 2 이상이면 이번 공격에 대해
- *     준 피해의 50%를 추가 피해로 넣는다.
+ *     준 피해의 50%를 추가 피해로 넣는다. -> 10%로 너프
  *   - 발동 후 쿨타임 4턴.
  */
 public class SpeedsterQuickComboSkill implements Skill {
 
 
-    private static final double EXTRA_DAMAGE_RATIO = 0.50;
-    private static final int COOLDOWN_TURNS = 4;
+    private static final double EXTRA_DAMAGE_RATIO = 0.10; // 50% -> 10%로 너프
+    private static final int COOLDOWN_TURNS = 4; //
 
     private int actionCount = 0;
     private int cooldown = 0;

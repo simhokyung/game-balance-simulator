@@ -8,8 +8,8 @@ import balance.skill.SkillContext;
  * Speedster 스킬2 - Precise Dodge
  *
  * - 큰 피해(직전 HP의 25% 이상)를 받으면:
- *    - 해당 피해의 30%를 즉시 회복 (첫 히트 감소)
- *    - 다음 한 번 더 맞을 때, 그 피해의 50%를 회복 (기댓값 회피)
+ *    - 해당 피해의 5%를 즉시 회복 (첫 히트 감소)
+ *    - 다음 한 번 더 맞을 때, 그 피해의 5%를 회복 (기댓값 회피)
  *    - 쿨타임 4턴
  *
  * - nextHitMitigationCharges를 이용해 "다음 한 번"만 추가 감소.
@@ -17,8 +17,8 @@ import balance.skill.SkillContext;
 public class SpeedsterPreciseDodgeSkill implements Skill {
 
     private static final double BIG_HIT_RATIO = 0.25;
-    private static final double FIRST_HIT_REDUCE = 0.30;
-    private static final double NEXT_HIT_REDUCE = 0.50;
+    private static final double FIRST_HIT_REDUCE = 0.05; // 30% -> 5%로 너프
+    private static final double NEXT_HIT_REDUCE = 0.05; // 50% -> 5%로 너프
     private static final int COOLDOWN_TURNS = 4;
 
     private int cooldown = 0;
