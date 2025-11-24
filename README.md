@@ -177,12 +177,12 @@ Bruiser   | UNDERPOWERED | 0.15 | 7422/42578/0  | 50000
 - 승률 0.60 초과  → OVERPOWERED (너프 필요)
 
 ----- 상세 사유 -----
-[Bruiser] 승률이 중간 구간(40%~60%)에 위치하여 BALANCED로 분류합니다. (승률=0.58)
-[Sustainer] 승률이 중간 구간(40%~60%)에 위치하여 BALANCED로 분류합니다. (승률=0.50)
-[Speedster] 승률이 중간 구간(40%~60%)에 위치하여 BALANCED로 분류합니다. (승률=0.50)
-[Hybrid] 승률이 중간 구간(40%~60%)에 위치하여 BALANCED로 분류합니다. (승률=0.48)
-[Assassin] 승률이 중간 구간(40%~60%)에 위치하여 BALANCED로 분류합니다. (승률=0.47)
-[Tank] 승률이 중간 구간(40%~60%)에 위치하여 BALANCED로 분류합니다. (승률=0.46)
+[Sustainer] 승률이 60% 이상(0.72)으로 높아 OVERPOWERED로 분류합니다.
+[Assassin] 승률이 60% 이상(0.61)으로 높아 OVERPOWERED로 분류합니다.
+[Hybrid] 승률이 중간 구간(40%~60%)에 위치하여 BALANCED로 분류합니다. (승률=0.59)
+[Speedster] 승률이 중간 구간(40%~60%)에 위치하여 BALANCED로 분류합니다. (승률=0.55)
+[Tank] 승률이 40% 이하(0.38)로 낮아 UNDERPOWERED로 분류합니다.
+[Bruiser] 승률이 40% 이하(0.15)로 낮아 UNDERPOWERED로 분류합니다.
 ```
 
 ### 2) 매치업 승률 매트릭스 
@@ -209,7 +209,9 @@ Bruiser   | UNDERPOWERED | 0.15 | 7422/42578/0  | 50000
 ```
 - `1`을 선택하면 **캐릭터 vs 캐릭터 승률 테이블**이 출력된다.
 - `2`를 선택하면 테이블 없이 프로그램이 종료된다.
+
 ---
+
 ## 🗡️ 전투 규칙 요약
 전투는 항상 **1:1**로 진행된다.
 ### 1) 속도 게이지 기반 턴 시스템
@@ -277,18 +279,18 @@ void onDamaged(SkillContext ctx, int damageTaken);     // 피해를 입은 직�
     - 체력·공격력을 모두 갖춘 근접 파이터
     - 맞다 보면 분노가 쌓이고, 특정 타이밍에 큰 한 방을 넣는 구조
 
-- **패시브 – Rage Passive (`BruiserRagePassiveSkill`)**
+- **패시브 – Rage Passive** (`BruiserRagePassiveSkill`)
     - 피해를 받을 때마다 분노 스택 +1 (최대 10)
     - 실제 추가 피해는 분노 폭발 스킬에서 사용
 
-- **스킬1 – Raging Blow (`BruiserRagingBlowSkill`)**
+- **스킬1 – Raging Blow** (`BruiserRagingBlowSkill`)
     - 턴 시작 시 쿨타임 감소
     - 공격 직전, **분노 스택 ≥ 7 & 쿨타임 0**이면 이번 공격에 분노 폭발 활성화
     - 공격 후, 활성화 상태라면
         - 스택당 +1% 추가 피해
         - 스택 초기화 + 5턴 쿨타임
 
-- **스킬2 – Second Wind (`BruiserSecondWindSkill`)**
+- **스킬2 – Second Wind** (`BruiserSecondWindSkill`)
     - 전투 중 자신의 HP가 **처음으로 25% 이하**가 될 때 1회 발동
         - 최대 HP의 15% 즉시 회복
         - 이후 1턴 동안 받은 피해의 5%를 되돌려 받아 추가 생존력 확보
@@ -301,17 +303,17 @@ void onDamaged(SkillContext ctx, int damageTaken);     // 피해를 입은 직�
     - 초반/짧은 턴 안에 상대를 녹이는 폭딜형
     - 대신 한 번 타이밍을 놓치면 평범한 딜러 수준으로 떨어지는 리스크
 
-- **패시브 – Exposed Weakness (`AssassinExposedWeaknessSkill`)**
+- **패시브 – Exposed Weakness** (`AssassinExposedWeaknessSkill`)
     - 적의 현재 HP가 30% 이하일 때,  
       이번 공격으로 입힌 피해의 5%를 **추가 피해**로 한 번 더 넣는다.
     - 마무리 타이밍에 위력이 올라가는 구조
 
-- **스킬1 – Opening Strike (`AssassinOpeningStrikeSkill`)**
+- **스킬1 – Opening Strike** (`AssassinOpeningStrikeSkill`)
     - 전투 내 **“이 암살자의 첫 공격”**에 한해 발동
     - 그 공격이 입힌 피해의 40%만큼 추가 피해
     - 한 번 발동 후에는 해당 전투에서 다시 발동하지 않는다.
 
-- **스킬2 – Shadow Evasion (`AssassinShadowEvasionSkill`)**
+- **스킬2 – Shadow Evasion** (`AssassinShadowEvasionSkill`)
     - HP가 30% 이하로 떨어지는 피해를 입을 때:
         - 이번 피해의 30%를 즉시 되돌려 받아 피해 감소
         - 다음 1턴 동안 맞을 때마다 피해의 50%를 기대값 기준으로 되돌려 받는다.
@@ -324,16 +326,16 @@ void onDamaged(SkillContext ctx, int damageTaken);     // 피해를 입은 직�
 - **기본 컨셉**
     - 들어오는 피해를 크게 줄이고, 때때로 반격으로 손해를 돌려주는 방어형
 
-- **패시브 – Heavy Armor (`TankHeavyArmorSkill`)**
+- **패시브 – Heavy Armor** (`TankHeavyArmorSkill`)
     - 모든 피해에 대해 `고정 5 + 피해의 5%`만큼 상쇄
     - 구현상, 받은 피해 직후 heal을 통해 **실질 피해 감소**로 근사
 
-- **스킬1 – Fortify (`TankFortifySkill`)**
+- **스킬1 – Fortify** (`TankFortifySkill`)
     - 자기 턴 시작 시, 버프가 없고 쿨타임 0이면 자동 발동
     - 2턴 동안 맞는 피해의 10%를 되돌려 받아 추가 피해 감소
     - 5턴 쿨타임
 
-- **스킬2 – Spiked Counter (`TankSpikedCounterSkill`)**
+- **스킬2 – Spiked Counter** (`TankSpikedCounterSkill`)
     - HP 50% 이상 & 쿨타임 0 상태에서 큰 피해를 맞으면
         - 받은 피해의 15%를 즉시 반사
         - 3턴 쿨타임
@@ -346,17 +348,17 @@ void onDamaged(SkillContext ctx, int damageTaken);     // 피해를 입은 직�
 - **기본 컨셉**
     - SPD가 높아 자주 행동하고, 일정 간격으로 추가 타격/피해 감소를 노리는 캐릭터
 
-- **패시브 – Quick Footwork (`SpeedsterQuickFootworkSkill`)**
+- **패시브 – Quick Footwork** (`SpeedsterQuickFootworkSkill`)
     - 매 공격 후, 준 피해의 5%를 추가 피해로 더 넣는다.
     - **“속도가 높아 평균적으로 더 많은 피해를 누적한다”**는 컨셉을 수치로 근사
 
-- **스킬1 – Quick Combo (`SpeedsterQuickComboSkill`)**
+- **스킬1 – Quick Combo** (`SpeedsterQuickComboSkill`)
     - 자신의 행동 횟수를 세다가,
         - 행동 2회 이상 & 쿨타임 0이면 이번 공격에 한해  
           준 피해의 10%를 추가 피해로 더한다.
         - 발동 후 4턴 쿨타임
 
-- **스킬2 – Precise Dodge (`SpeedsterPreciseDodgeSkill`)**
+- **스킬2 – Precise Dodge** (`SpeedsterPreciseDodgeSkill`)
     - 직전 HP의 25% 이상에 해당하는 큰 피해를 맞으면:
         - 그 피해의 5%를 즉시 회복
         - **다음 한 번 더 맞을 때**, 그 피해의 5%를 추가로 회복
@@ -369,15 +371,15 @@ void onDamaged(SkillContext ctx, int damageTaken);     // 피해를 입은 직�
 - **기본 컨셉**
     - 한 방 폭딜은 약하지만, 흡혈과 재생으로 오래 버티면서 천천히 이득을 본다.
 
-- **패시브 – Lifesteal (`SustainerLifestealSkill`)**
+- **패시브 – Lifesteal** (`SustainerLifestealSkill`)
     - 자신이 준 피해의 5%만큼 체력을 회복
 
-- **스킬1 – Healing Aura (`SustainerRegenSkill`)**
+- **스킬1 – Healing Aura** (`SustainerRegenSkill`)
     - HP 비율이 30% 이하일 때, 재생 효과와 쿨타임이 모두 비활성 상태라면:
         - 3턴 동안 턴 시작 시마다 최대 HP의 5% 회복
         - 이후 5턴 쿨타임
 
-- **스킬2 – Blood Frenzy (`SustainerBloodFrenzySkill`)**
+- **스킬2 – Blood Frenzy** (`SustainerBloodFrenzySkill`)
     - HP 비율이 30% 이하이고 쿨타임 0일 때:
         - 이번 공격으로 준 피해의 15%를 추가로 회복
         - 4턴 쿨타임
@@ -389,16 +391,16 @@ void onDamaged(SkillContext ctx, int damageTaken);     // 피해를 입은 직�
 - **기본 컨셉**
     - HP가 높을 땐 공격형, 낮을 땐 방어형으로 작동하는 유연한 캐릭터
 
-- **패시브 – Balanced Instinct (`HybridBalancedInstinctSkill`)**
+- **패시브 – Balanced Instinct** (`HybridBalancedInstinctSkill`)
     - HP ≥ 50%: 공격 모드 → 공격 시 준 피해의 5%만큼 추가 피해
     - HP < 50%: 방어 모드 → 피해를 입을 때마다 피해의 5%만큼 회복
 
-- **스킬1 – Tactical Focus (`HybridTacticalFocusSkill`)**
+- **스킬1 – Tactical Focus** (`HybridTacticalFocusSkill`)
     - 턴 시작 시 일정 조건에서 자동으로 “집중 모드” 활성
     - 집중 상태에서는 공격 후 준 피해의 10%만큼 추가 피해
     - 일정 턴 동안 유지되며, 이후 쿨타임이 돈다.
 
-- **스킬2 – Expose Pattern (`HybridExposePatternSkill`)**
+- **스킬2 – Expose Pattern** (`HybridExposePatternSkill`)
     - 같은 대상에게 **연속 2회 이상** 공격했고, 쿨타임 0이면:
         - 이번 공격에 한해 준 피해의 10% 추가 피해
         - 이후 3턴 쿨타임
