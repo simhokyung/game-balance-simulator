@@ -27,13 +27,13 @@ public final class PresetCharacters {
             0.22
     );
 
-    // 탱커: 살짝 버프 (여전히 단단하지만, 너무 약하지는 않게)
+    // 탱커: 너프
     private static final Character TANK = new Character(
             "Tank",
-            158,   // HP: 155 -> 158 (조금 더 버티게)
-            35,    // ATK: 34 -> 35 (딜 미세 상향)
+            150,   // HP: 158 -> 150 (HP 너프)
+            30,    // ATK: 35 -> 30 (딜 너프)
             38,    // DEF: 그대로
-            19,    // SPD: 18 -> 19 (턴 주기 아주 조금 상향)
+            17,    // SPD: 19 -> 17 (스피드 미세 너프)
             0.05
     );
 
