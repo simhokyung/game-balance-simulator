@@ -12,6 +12,9 @@ import balance.skill.sustainer.SustainerBloodFrenzySkill;
 import balance.skill.sustainer.SustainerLifestealSkill;
 import balance.skill.sustainer.SustainerRegenSkill;
 
+import balance.skill.tank.TankFortifySkill;
+import balance.skill.tank.TankHeavyArmorSkill;
+import balance.skill.tank.TankSpikedCounterSkill;
 import java.util.Collections;
 import java.util.List;
 
@@ -67,7 +70,16 @@ public class PresetSkillSetProvider implements SkillSetProvider {
             );
         }
 
-        // TODO: Assassin / Tank / Speedster / Hybrid 스킬은 이후 단계에서 추가
+        // ✅ Tank: 철벽 + 방어 자세 + 철의 반격
+        if ("Tank".equalsIgnoreCase(name)) {
+            return List.of(
+                    new TankHeavyArmorSkill(),
+                    new TankFortifySkill(),
+                    new TankSpikedCounterSkill()
+            );
+        }
+
+        // TODO: Speedster / Hybrid 스킬은 이후 단계에서 추가
         return Collections.emptyList();
     }
 }
