@@ -11,7 +11,7 @@ import balance.skill.SkillContext;
  */
 public class BruiserRallyStrikeSkill implements Skill {
 
-    private static final double LIFE_STEAL_RATIO = 0.05; // 가한 피해의 5%
+    private static final double LIFE_STEAL_RATIO = 0.03; // 5% → 3% 로 너프
 
     @Override
     public void onAfterAttack(SkillContext context, int damageDealt) {

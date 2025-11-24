@@ -11,7 +11,7 @@ import balance.skill.SkillContext;
  */
 public class BruiserFortitudePassive implements Skill {
 
-    private static final double MAX_HP_HEAL_RATIO = 0.02; // 최대 체력의 2%
+    private static final double MAX_HP_HEAL_RATIO = 0.01; // 2% → 1% 로 너프
 
     @Override
     public void onDamaged(SkillContext context, int damageTaken) {
