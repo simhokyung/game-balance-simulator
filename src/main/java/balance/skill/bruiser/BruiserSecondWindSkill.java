@@ -5,11 +5,11 @@ import balance.skill.Skill;
 import balance.skill.SkillContext;
 
 /**
- * 브루저 스킬 - 근성(Second Wind) (너프 버전)
+ * 브루저 액티브 스킬 - 근성(Second Wind)
  *
- * - 전투 중 자신의 HP가 처음으로 25% 이하로 떨어질 때 1회 발동한다.
- *   - 즉시 최대 체력의 15%를 회복하고,
- *   - 이후 1턴 동안 받은 피해의 5%를 다시 회복한다.
+ * - 전투 중 자신의 HP가 처음으로 25% 이하로 떨어질 때 1회 발동:
+ *   - 즉시 최대 체력의 15% 회복
+ *   - 이후 1턴 동안 받은 피해의 5%를 다시 회복
  */
 public class BruiserSecondWindSkill implements Skill {
 
