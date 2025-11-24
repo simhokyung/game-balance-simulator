@@ -65,7 +65,7 @@ public class InputView {
      */
     public int readPresetMetaAction() {
         System.out.println();
-        System.out.println("무엇을 하시겠습니까?");
+        System.out.println("[프리셋 모드] 1대1 밸런스형 전투 캐릭터 6종을 사용합니다.");
         System.out.println("1: 캐릭터별 스탯 / 스킬 설명 보기");
         System.out.println("2: 전투 시작하기");
         System.out.print("번호를 입력하세요 (1-2): ");
